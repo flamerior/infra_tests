@@ -15,7 +15,7 @@ echo GROUP:$GROUP
 echo HOMEWORK:$BRANCH
 
 echo "Clone repository with tests"
-git clone -b $GROUP --single-branch $REPO
+git clone --single-branch $REPO
 
 if [ -f $HOMEWORK_RUN ]; then
 	echo "Run tests"

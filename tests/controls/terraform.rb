@@ -33,5 +33,21 @@ control 'terraform' do
     its('stdout') { should match "Terraform has been successfully initialized!" }
     its('stderr') { should eq '' }
     its('exit_status') { should eq 0 }
+    end
+end
+
+control 'terraform' do
+  impact 1
+  title 'Run terraform tflint for stage & prod'
+  describe command('cd terraform/prod && tflint --var-file=terraform.tfvars.example --error-with-issues') do
+    its('stdout') { should match "Your code is following the best practices" }
+    its('stderr') { should eq '' }
+    its('exit_status') { should eq 0 }
+  end
+
+  describe command('cd terraform/stage && tflint --var-file=terraform.tfvars.example --error-with-issues') do
+    its('stdout') { should match "Your code is following the best practices" }
+    its('stderr') { should eq '' }
+    its('exit_status') { should eq 0 }
   end
 end
